@@ -1,0 +1,47 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <main role="main">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-push-12">
+                    {% if post_more.published_date == None %}
+                        <h2>{{ post_more.title }}</h2><br> {{ post_more.published_date }}<br>
+                        <p>{{ post_more.text }}</p> <br>
+                        <a class="btn btn-default" href="{% url 'post_publish' pk=post_more.pk %}">Publish</a><br>
+                        <a class="btn btn-default" href="{% url 'post_remove' pk=post_more.pk %}"><span class="glyphicon glyphicon-remove">Remove</span></a>
+                    {% else %}
+                        <h2>{{ post_more.title }}</h2>
+                        <a class="btn btn-default" href="{% url 'post_remove' pk=post_more.pk %}"><span class="glyphicon glyphicon-remove">Remove</span></a>
+                        <a class="btn btn-default" href="{% url 'edit' pk=post_more.pk %}"><span class="glyphicon glyphicon-remove">Edit</span></a>
+                        <br> {{ post_more.published_date }}<br>
+                        <p>{{ post_more.text }}</p> <br>
+
+                    {% endif %}
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="card" style="width: 18rem;"  >
+                        <ul class="list-group " >
+                            <li class="list-group-item d-flex justify-content-between align-items-center"><strong>Comments</strong><span class="badge badge-primary badge-pill">{{ count }} </span></li>
+                            <div class="anyClass">
+                                {% for comment in comments %}
+                                    <li class="list-group-item" >  <b>{{ comment.reader }}</b>:{{ comment.text }} <br>{{ comment.created_date }}<br></li>
+                                {% endfor %}
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-push-4">
+                    {% include 'blog/comment.html' %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        </div> <!-- /container -->
+    </main>
+{% endblock %}

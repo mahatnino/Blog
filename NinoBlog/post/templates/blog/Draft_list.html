@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+{% block content %}
+<main role="main">
+<br><br><br>
+<div class="container">
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-md-4">
+                <h2>{{ post.title }}</h2>
+                <p class="date">created: {{ post.created_date|date:'d-m-Y' }}</p>
+                <p>{{ post.text|safe|truncatewords:"20"|linebreaks }}</p>
+                <p><a class="btn btn-secondary" href="{% url 'readmore' pk=post.pk %}" role="button">Read More &raquo;</a></p>
+            </div>
+        {% endfor %}<br>
+    </div>
+    <hr>
+     </div> <!-- /container -->
+</main>
+{% endblock %}
+

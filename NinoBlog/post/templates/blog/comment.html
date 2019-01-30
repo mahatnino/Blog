@@ -1,0 +1,13 @@
+<form action="{% url 'comment' post_more.pk%}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="name"> Full Name</label>
+        <input type="Text" class="form-control"  placeholder="Enter Full name" name="comment_name">
+    </div>
+    <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea class="form-control"  placeholder="Comment" name="comment"></textarea>
+
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
